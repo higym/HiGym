@@ -1,4 +1,4 @@
-"""Check an installed higym: all ids, one env per family, no training stack.
+"""Check an installed higym: all ids, one env per family, no training stack, ablations.
 
 Run from outside the repo so the installed package, not src/, is imported.
 """
@@ -15,4 +15,9 @@ for name in ("quadruped-16_walk", "cheetah-8_run", "walker-8_walk", "finger-2_sp
     env.step(env.action_space.sample())
 loaded = {"torch", "hydra", "wandb", "tensordict"} & set(sys.modules)
 assert not loaded, loaded
+
+import higym.ablations  # noqa: E402
+
+assert len(higym.ablations.list_tasks()) == 24
+higym.make("walker-8a100_run").reset(seed=0)
 print("ok", higym.__version__, higym.__file__)
