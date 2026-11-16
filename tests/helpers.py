@@ -3,6 +3,7 @@
 import hashlib
 from unittest import mock
 
+import numpy as np
 from dm_control.mujoco import engine
 
 
@@ -39,3 +40,19 @@ def mjcf_digest(factory):
         digest.update(key.encode())
         digest.update(hashlib.sha256(_bytes(assets[key])).digest())
     return digest.hexdigest()
+
+
+def reference_rollout(name, steps=50):
+    """Observations and rewards of ``steps`` seeded random actions after ``reset(seed=0)``."""
+    import higym
+
+    env = higym.make(name)
+    observations = [env.reset(seed=0)[0]]
+    shape = (steps, *env.action_space.shape)
+    actions = np.random.default_rng(0).uniform(-1, 1, shape).astype(np.float32)
+    rewards = []
+    for action in actions:
+        obs, reward, *_ = env.step(action)
+        observations.append(obs)
+        rewards.append(reward)
+    return np.stack(observations), np.array(rewards)
