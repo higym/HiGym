@@ -12,7 +12,7 @@ from dm_control import mujoco
 from dm_control.mujoco.wrapper.core import MjvOption
 from PIL import Image
 
-_TASKS_DIR = os.path.join(os.path.dirname(__file__), 'src', 'higym', 'tasks')
+_TASKS_DIR = os.path.join(os.path.dirname(__file__), '..', 'src', 'higym', 'tasks')
 sys.path.insert(0, _TASKS_DIR)
 
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), 'results')
