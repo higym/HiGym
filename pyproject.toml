@@ -40,3 +40,23 @@ packages = ["src/higym"]
 testpaths = ["tests"]
 pythonpath = ["tests"]
 markers = ["slow: large models; deselect with -m 'not slow'"]
+
+[tool.ruff]
+line-length = 120
+# Task modules stay byte-identical to the paper code; TD-MPC2 is example code.
+extend-exclude = ["src/higym/tasks", "tdmpc2", "render_embodiments.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+
+[tool.mypy]
+files = ["src/higym"]
+exclude = ["src/higym/tasks/"]
+
+[[tool.mypy.overrides]]
+module = ["higym.tasks.*"]
+follow_imports = "skip"
+
+[[tool.mypy.overrides]]
+module = ["dm_control.*"]
+ignore_missing_imports = true

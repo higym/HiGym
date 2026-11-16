@@ -1,6 +1,5 @@
 """HiGymEnv reproduces the paper's wrapper stack and the Gymnasium contract."""
 
-import gymnasium
 import numpy as np
 import pytest
 from dm_control.suite.wrappers import action_scale

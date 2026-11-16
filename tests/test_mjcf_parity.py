@@ -5,7 +5,6 @@ import json
 import pathlib
 
 import pytest
-
 from helpers import mjcf_digest
 
 GOLDEN = json.loads((pathlib.Path(__file__).parent / "data" / "mjcf_sha256.json").read_text())

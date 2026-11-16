@@ -1,6 +1,7 @@
 """The paper's environment protocol as a Gymnasium environment."""
 
 import numbers
+from typing import Any
 
 import gymnasium
 import numpy as np
@@ -48,8 +49,8 @@ class HiGymEnv(gymnasium.Env):
         if render_mode not in (None, "rgb_array"):
             raise ValueError(f"render_mode must be None or 'rgb_array', got {render_mode!r}")
 
-        self.dm_env = load(domain, task)
-        self._env = action_scale.Wrapper(self.dm_env, minimum=-1.0, maximum=1.0)
+        self.dm_env: Any = load(domain, task)
+        self._env: Any = action_scale.Wrapper(self.dm_env, minimum=-1.0, maximum=1.0)
         self.action_repeat = int(action_repeat)
         self.max_episode_steps = _CONTROL_STEPS // self.action_repeat
         self.render_mode = render_mode
@@ -64,9 +65,9 @@ class HiGymEnv(gymnasium.Env):
         fps = round(1 / (self.dm_env.control_timestep() * self.action_repeat))
         self.metadata = {**self.metadata, "render_fps": fps}
 
-        self._needs_reset = True
-        self._steps = 0
-        self._return = 0.0
+        self._needs_reset: bool = True
+        self._steps: int = 0
+        self._return: float = 0.0
 
     @staticmethod
     def _flatten(observation):

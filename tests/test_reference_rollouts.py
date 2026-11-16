@@ -9,7 +9,6 @@ import pathlib
 
 import numpy as np
 import pytest
-
 from helpers import reference_rollout
 
 REFERENCE = np.load(pathlib.Path(__file__).parent / "data" / "reference_rollouts.npz")
