@@ -2,7 +2,7 @@
 import gymnasium as gym
 import numpy as np
 
-from envs.tasks import quadruped, reacher, walker, cheetah, finger, humanoid_CMU
+from higym.tasks import quadruped, reacher, walker, cheetah, finger, humanoid_CMU
 from dm_control import suite
 suite.ALL_TASKS = suite.ALL_TASKS + suite._get_tasks('custom')
 suite.TASKS_BY_DOMAIN = suite._get_tasks_by_domain(suite.ALL_TASKS)

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "higym"
+dynamic = ["version"]
+description = "High-DoF continuous-control environments for Gymnasium, built on dm_control"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "HiGym authors" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "dm-control==1.0.34",
+    "mujoco==3.3.6",
+    "gymnasium>=0.29.1",
+    "numpy>=1.24",
+    "lxml",
+]
+
+[project.optional-dependencies]
+# The rest of the software stack the paper's results were produced with.
+paper = ["gymnasium==0.29.1", "numpy==1.24.4"]
+dev = ["pytest", "ruff", "mypy", "build"]
+
+[project.urls]
+Homepage = "https://higym.github.io"
+Repository = "https://github.com/higym/HiGym"
+
+[tool.hatch.version]
+path = "src/higym/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/higym"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]
+markers = ["slow: large models; deselect with -m 'not slow'"]

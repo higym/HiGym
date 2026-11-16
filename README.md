@@ -35,6 +35,13 @@ conda env create -n higym -f docker/environment.yaml
 conda activate higym
 ```
 
+The environments live in the `higym` package. Install it into the same
+environment from the repo root:
+
+```bash
+pip install -e .
+```
+
 ## Training
 
 Single-task training is launched via Hydra:
