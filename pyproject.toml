@@ -43,8 +43,8 @@ markers = ["slow: large models; deselect with -m 'not slow'"]
 
 [tool.ruff]
 line-length = 120
-# Task modules stay byte-identical to the paper code; TD-MPC2 is example code.
-extend-exclude = ["src/higym/tasks", "tdmpc2", "render_embodiments.py"]
+# Task modules stay byte-identical to the paper code; TD-MPC2 is example code kept as written.
+extend-exclude = ["src/higym/tasks", "examples/tdmpc2", "render_embodiments.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B"]
