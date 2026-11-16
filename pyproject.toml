@@ -15,7 +15,9 @@ dependencies = [
     "dm-control==1.0.34",
     "mujoco==3.3.6",
     "gymnasium>=0.29.1",
-    "numpy>=1.24",
+    # numpy 2 changed np.interp in the last bit, which flips the 6-digit
+    # rounding of joint ranges in walker-128 and cheetah-512 (tests/test_mjcf_parity.py).
+    "numpy>=1.24,<2",
     "lxml",
 ]
 
