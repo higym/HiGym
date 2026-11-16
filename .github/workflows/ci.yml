@@ -40,6 +40,15 @@ jobs:
       - run: ruff check .
       - run: mypy
       - run: pytest -m "not slow"
+      # Kept as an artifact so references for this platform can be checked or added.
+      - name: Record reference rollouts on this platform
+        if: always()
+        run: python scripts/record_reference_rollouts.py "$RUNNER_TEMP/reference_rollouts.npz"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-rollouts-python${{ matrix.python }}-${{ matrix.stack }}
+          path: ${{ runner.temp }}/reference_rollouts.npz
 
   wheel:
     runs-on: ubuntu-latest

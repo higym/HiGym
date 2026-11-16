@@ -1,6 +1,8 @@
 """Shared test helpers."""
 
 import hashlib
+import platform
+import sys
 from unittest import mock
 
 import numpy as np
@@ -40,6 +42,16 @@ def mjcf_digest(factory):
         digest.update(key.encode())
         digest.update(hashlib.sha256(_bytes(assets[key])).digest())
     return digest.hexdigest()
+
+
+# One task per family, at its smallest Table 1 size.
+REFERENCE_TASKS = ["cheetah-8_run", "walker-8_walk", "quadruped-16_escape",
+                   "finger-2_turn_hard", "reacher-2_hard", "humanoid_CMU-80_walk"]
+
+
+def platform_tag():
+    """E.g. ``"linux-x86_64"``; MuJoCo trajectories are only bitwise stable within one."""
+    return f"{sys.platform}-{platform.machine()}"
 
 
 def reference_rollout(name, steps=50):
