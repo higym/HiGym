@@ -3,9 +3,10 @@
 import gymnasium
 
 from higym._suite import load, table1_tasks
+from higym.env import HiGymEnv
 
 __version__ = "0.1.0"
-__all__ = ["list_tasks", "load", "make"]
+__all__ = ["HiGymEnv", "list_tasks", "load", "make"]
 
 
 def list_tasks() -> list[str]:
